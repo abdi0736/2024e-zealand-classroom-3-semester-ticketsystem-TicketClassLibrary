@@ -85,6 +85,6 @@ namespace TicketClassLibrary.Tests
                 // Assert
                 Assert.AreEqual("ABDI123", licensePlate);
             }
-        } //7
+        } 
     }
 } 
