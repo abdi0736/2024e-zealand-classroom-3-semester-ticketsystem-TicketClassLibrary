@@ -7,7 +7,7 @@ public class MC:Car
         LicensePlate = licensePlate;
         Date = date;
     }
-    
+    //s
     public new double Price { get; } = 125; 
     
     public new string Vehicletype()
