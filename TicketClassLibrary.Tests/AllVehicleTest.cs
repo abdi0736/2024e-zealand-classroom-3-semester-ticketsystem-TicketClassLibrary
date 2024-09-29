@@ -10,9 +10,7 @@ namespace TicketClassLibrary.Tests;
 public class AllVehicleTest
 {
 
-    /// <summary>
-    /// Tests the <see cref="Car.Vehicletype"/> property.
-    /// </summary>
+   
     [TestMethod]
     public void VehicleTest()
     {
