@@ -1,78 +1,90 @@
 using System;
 using JetBrains.Annotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TicketClassLibrary;
 
-namespace TicketClassLibrary.Tests;
-
-[TestClass]
-[TestSubject(typeof(Car))]
-public class AllVehicleTest
+namespace TicketClassLibrary.Tests
 {
-
-   
-    [TestMethod]
-    public void VehicleTest()
-    {
-        //arrange
-        Car car0 = new Car();
-        
-        //act
-        string car0Name = "Car";
-        
-        //assert
-        Assert.AreEqual("Car", car0Name);
-    }
-
-    [TestMethod]
-    public void MakepricecarTest()
-    {
-        // Arrange
-        Car car1 = new Car();
-    
-        // Act
-        double car1Price = car1.Price;
-    
-        // Assert
-        Assert.AreEqual(240, car1Price);
-    }
-
-
-
-
-
     [TestClass]
-    [TestSubject(typeof(MC))]
-    public class MCTest
+    public class AllVehicleTest
     {
-
         [TestMethod]
-        public void TestMCprice()
-        {
-
-            //arrange   
-            MC mc0 = new MC();
-
-            //act
-            string mc0Name = "MC";
-
-            //assert
-            Assert.AreEqual("MC", mc0Name);
-        }
-        
-        [TestMethod]
-        public void MakepricemcTest()
+        public void VehicleTest()
         {
             // Arrange
-            MC mc1 = new MC();
+            Car car0 = new Car();
 
             // Act
-            double mc1Price = mc1.Price;
+            string car0Name = car0.Vehicletype();
 
             // Assert
-            Assert.AreEqual(125, mc1Price);
+            Assert.AreEqual("Car", car0Name);
         }
 
+        [TestMethod]
+        public void MakepricecarTest()
+        {
+            // Arrange
+            Car car1 = new Car();
+
+            // Act
+            double car1Price = car1.Price;
+
+            // Assert
+            Assert.AreEqual(240, car1Price);
+        }
+
+        [TestMethod]
+        public void LicensePlateTestcar()
+        {
+            // Arrange
+            var car = new Car();
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => car.LicensePlate = "ABDI1234");
+        }
+
+        [TestClass]
+        [TestSubject(typeof(MC))]
+        public class MCTest
+        {
+            [TestMethod]
+            public void TestMCprice()
+            {
+                // Arrange
+                MC mc0 = new MC("ABDI123", DateTime.Now);
+
+                // Act
+                string mc0Name = "MC";
+
+                // Assert
+                Assert.AreEqual("MC", mc0Name);
+            }
+
+            [TestMethod]
+            public void MakepricemcTest()
+            {
+                // Arrange
+                MC mc1 = new MC("ABDI123", DateTime.Now);
+
+                // Act
+                double mc1Price = mc1.Price;
+
+                // Assert
+                Assert.AreEqual(125, mc1Price);
+            }
+
+            [TestMethod]
+            public void MakelicenseTest()
+            {
+                // Arrange
+                MC mc2 = new MC("ABDI123", DateTime.Now);
+
+                // Act
+                string licensePlate = mc2.LicensePlate;
+
+                // Assert
+                Assert.AreEqual("ABDI123", licensePlate);
+            }
+        }
     }
 }
-
