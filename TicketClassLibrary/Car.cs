@@ -1,50 +1,73 @@
+using System.Runtime.InteropServices.Marshalling;
+
+using System;
+
 namespace TicketClassLibrary;
 
 /// <summary>
-/// Represents a car with a license plate, date, price, and vehicle type.
+/// Repræsenterer en bil med en nummerplade, dato, pris og køretøjstype.
 /// </summary>
-public class Car
+public class Car : AllVehicle
 {
-    
-    private string _licensePlate;
-    public string LicensePlate
-    {
-        get => _licensePlate;
-        set
-        {
-            if (value.Length > 7)
-            {
-                throw new ArgumentException("Nummerplade kan ikke overstige 7 karakter.");
-            }
-            _licensePlate = value;
-        }
-    }
-    
-    /// <summary>
-    /// Gets or sets the date with the car.
-    /// </summary>
-    public DateTime Date { get; set; }
-    
-    
-    /// <summary>
-    /// Gets the price of the car, which is fixed at 240.
-    /// </summary>  
-    public double Price { get; } = 240;
-    
-    
+    private const double RegularPrice = 240; // Standardpris for biler
+    private const double BrobizzDiscount = 0.05; // 5% BroBizz-rabat
 
     /// <summary>
-    /// Returns the vehicle type, which is always "Car".
+    /// Initialiserer en ny instans af <see cref="Car"/>-klassen med nummerplade, dato og BroBizz-rabatstatus.
     /// </summary>
-    /// <returns>The string "Car".</returns>
-    public string Vehicletype()
+    /// <param name="licensePlate">Bilens nummerplade.</param>
+    /// <param name="date">Datoen, der er knyttet til bilen.</param>
+    /// <param name="hasBroBizz">Angiver, om bilen har en BroBizz-rabat.</param>
+    public Car(string licensePlate, DateTime date, bool hasBroBizz = false)
+    {
+        LicensePlate = licensePlate;
+        Date = date;
+
+        // Beregn den endelige pris baseret på dato og om BroBizz er anvendt
+        Price = CalculateFinalPrice(RegularPrice, hasBroBizz, date);
+    }
+
+    /// <summary>
+    /// Beregner den endelige pris efter at have anvendt weekend- og BroBizz-rabatter.
+    /// </summary>
+    /// <param name="basePrice">Bilens grundpris.</param>
+    /// <param name="hasBroBizz">Angiver, om BroBizz-rabatten skal anvendes.</param>
+    /// <param name="date">Datoen for bilens passage.</param>
+    /// <returns>Den endelige pris efter alle relevante rabatter er anvendt.</returns>
+    private double CalculateFinalPrice(double basePrice, bool hasBroBizz, DateTime date)
+    {
+        // Anvend weekendrabat, hvis relevant
+        if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+        {
+            basePrice *= 0.8; // 20% weekendrabat
+        }
+
+        // Anvend BroBizz-rabat, hvis relevant
+        if (hasBroBizz)
+        {
+            basePrice *= (1 - BrobizzDiscount); // 5% BroBizz-rabat
+        }
+
+        return basePrice;
+    }
+
+    /// <summary>
+    /// Anvender BroBizz-rabatten på bilens grundpris.
+    /// </summary>
+    /// <param name="basePrice">Bilens grundpris.</param>
+    /// <param name="hasBroBizz">Angiver, om BroBizz-rabatten skal anvendes.</param>
+    /// <returns>Prisen efter BroBizz-rabat.</returns>
+    public override double ApplyBroBizzDiscount(double basePrice, bool hasBroBizz)
+    {
+        return hasBroBizz ? basePrice * (1 - BrobizzDiscount) : basePrice;
+    }
+
+    /// <summary>
+    /// Returnerer køretøjstypen, som er "Car".
+    /// </summary>
+    public override string Vehicletype()
     {
         return "Car";
     }
     
 }
-
-    
-    
-    
-

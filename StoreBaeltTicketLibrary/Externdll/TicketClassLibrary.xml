@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TicketClassLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:TicketClassLibrary.AllVehicle">
+            <summary>
+            Abstrakt basisklasse for køretøjer. Indeholder fælles funktionalitet som nummerplade, dato og pris.
+            </summary>
+        </member>
+        <member name="P:TicketClassLibrary.AllVehicle.LicensePlate">
+            <summary>
+            Henter eller sætter nummerpladen med maksimalt 7 karakterer.
+            Kaster en fejl, hvis nummerpladen overstiger denne grænse.
+            </summary>
+        </member>
+        <member name="M:TicketClassLibrary.AllVehicle.ApplyBroBizzDiscount(System.Double,System.Boolean)">
+            <summary>
+            Abstrakt metode til at beregne BroBizz-rabat. Skal implementeres af afledte klasser.
+            </summary>
+            <param name="basePrice">Grundprisen før rabat.</param>
+            <param name="hasBroBizz">Angiver, om BroBizz-rabatten skal anvendes.</param>
+            <returns>Prisen efter BroBizz-rabatten er anvendt.</returns>
+        </member>
+        <member name="P:TicketClassLibrary.AllVehicle.Date">
+            <summary>
+            Henter eller sætter datoen, der er knyttet til køretøjet.
+            </summary>
+        </member>
+        <member name="P:TicketClassLibrary.AllVehicle.Price">
+            <summary>
+            Henter prisen for køretøjet. Bliver sat af afledte klasser.
+            </summary>
+        </member>
+        <member name="M:TicketClassLibrary.AllVehicle.Vehicletype">
+            <summary>
+            Returnerer køretøjstypen. Skal overstyres af afledte klasser for at specificere den faktiske type.
+            </summary>
+            <returns>Køretøjstypen som en streng.</returns>
+        </member>
+        <member name="T:TicketClassLibrary.Car">
+            <summary>
+            Repræsenterer en bil med en nummerplade, dato, pris og køretøjstype.
+            </summary>
+        </member>
+        <member name="M:TicketClassLibrary.Car.#ctor(System.String,System.DateTime,System.Boolean)">
+            <summary>
+            Initialiserer en ny instans af <see cref="T:TicketClassLibrary.Car"/>-klassen med nummerplade, dato og BroBizz-rabatstatus.
+            </summary>
+            <param name="licensePlate">Bilens nummerplade.</param>
+            <param name="date">Datoen, der er knyttet til bilen.</param>
+            <param name="hasBroBizz">Angiver, om bilen har en BroBizz-rabat.</param>
+        </member>
+        <member name="M:TicketClassLibrary.Car.CalculateFinalPrice(System.Double,System.Boolean,System.DateTime)">
+            <summary>
+            Beregner den endelige pris efter at have anvendt weekend- og BroBizz-rabatter.
+            </summary>
+            <param name="basePrice">Bilens grundpris.</param>
+            <param name="hasBroBizz">Angiver, om BroBizz-rabatten skal anvendes.</param>
+            <param name="date">Datoen for bilens passage.</param>
+            <returns>Den endelige pris efter alle relevante rabatter er anvendt.</returns>
+        </member>
+        <member name="M:TicketClassLibrary.Car.ApplyBroBizzDiscount(System.Double,System.Boolean)">
+            <summary>
+            Anvender BroBizz-rabatten på bilens grundpris.
+            </summary>
+            <param name="basePrice">Bilens grundpris.</param>
+            <param name="hasBroBizz">Angiver, om BroBizz-rabatten skal anvendes.</param>
+            <returns>Prisen efter BroBizz-rabat.</returns>
+        </member>
+        <member name="M:TicketClassLibrary.Car.Vehicletype">
+            <summary>
+            Returnerer køretøjstypen, som er "Car".
+            </summary>
+        </member>
+        <member name="M:TicketClassLibrary.MC.#ctor(System.String,System.DateTime)">
+            <summary>
+            Initialiserer en ny instans af <see cref="T:TicketClassLibrary.MC"/>-klassen med en nummerplade og dato.
+            </summary>
+            <param name="licensePlate">Nummerpladen på motorcyklen.</param>
+            <param name="date">Datoen, der er knyttet til motorcyklen.</param>
+        </member>
+        <member name="M:TicketClassLibrary.MC.ApplyBroBizzDiscount(System.Double,System.Boolean)">
+            <summary>
+            Overstyrer den abstrakte metode for at anvende BroBizz-rabat til motorcykler.
+            </summary>
+            <param name="basePrice">Grundprisen for motorcyklen.</param>
+            <param name="hasBroBizz">Angiver om BroBizz-rabat skal anvendes.</param>
+            <returns>Prisen efter BroBizz-rabat.</returns>
+        </member>
+        <member name="M:TicketClassLibrary.MC.Vehicletype">
+            <summary>
+            Returnerer køretøjstypen, som er "MC".
+            </summary>
+        </member>
+    </members>
+</doc>

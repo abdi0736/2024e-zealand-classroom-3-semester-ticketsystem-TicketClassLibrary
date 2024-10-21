@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- Specify the output location for the XML documentation file -->
+    <DocumentationFile>bin\Debug\net8.0\TicketClassLibrary.xml</DocumentationFile> <!-- Adjust the path if needed -->
+  </PropertyGroup>
+
 </Project>
